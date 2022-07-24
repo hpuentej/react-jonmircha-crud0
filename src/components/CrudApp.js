@@ -39,18 +39,27 @@ const initialDb = [
 ];
 
 const CrudApp = () => {
-  let [db, setDb] = useState(initialDb);
+  const [db, setDb] = useState(initialDb);
   const [dataToEdit, setDataToEdit] = useState(null);
 
   const createData = (data) => { // data is the object to be added
-    console.log(data)
+    // console.log(data)
     data.id = Date.now();
-    console.log(data)
-    db = db.concat(data);
-    setDb(db);
+    // console.log(data)
+    // db = db.concat(data);
+    let newDb = [...db, data];
+    setDb(newDb);
   };
 
-  const updateData = (data) => {};
+  const updateData = (data) => {
+    let newDb = db.map((item) => {
+      if (item.id === data.id) {
+        return data;
+      }
+      return item;
+    });
+    setDb(newDb);
+  };
 
   const deleteData = (id) => {};
 
